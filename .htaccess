@@ -1,0 +1,23 @@
+#order allow,deny
+#Deny from 103.57.43.11
+#Deny from 103.239.254.246 
+#Deny from 27.147.247.47
+#Deny from 103.73.47.210
+#Deny from 43.224.119.52
+#Deny from 103.83.164.170
+#Deny from 103.60.175.178
+#Deny from 103.46.148.2000
+#allow from all
+
+Order Allow,Deny
+Allow from all
+#Deny from  43.224.119.52
+#Deny from 103.57.43.11
+#Deny from 103.239.254.246
+#Deny from 27.147.247.47
+#Deny from 103.73.47.210
+#Deny from 103.83.164.170
+#Deny from 103.60.175.178
+#Deny from 103.46.148.200
+
+

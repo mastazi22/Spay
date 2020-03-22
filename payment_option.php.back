@@ -1,0 +1,302 @@
+<?php
+include ("includes/session_handler.php");
+include("includes/configure.php");
+error_reporting(E_ALL);
+
+if(count($_POST)==0)
+{
+	echo "<center><h3>This page requires parameters to access.</h3></center>";
+	die();
+}
+
+	$_SESSION['ORDER_DETAILS']=$_POST;
+	$gpspl = substr(($_SESSION['ORDER_DETAILS']['uniqID']),0,10);
+	$display_none = '';
+	//include("includes/header.php");
+	include("payment_engine/paymentEngine.php");
+
+      	$hasLogo = false;
+	if(isset($_SESSION['ORDER_DETAILS']['userID'])){
+		$sql = mysqli_query($GLOBALS["___mysqli_sm"],"select merchant_logo, merchant_domain from sp_merchants where id='{$_SESSION['ORDER_DETAILS']['userID']}'");
+//echo "select merchant_logo, merchant_domain from sp_merchants where id='{$_SESSION['ORDER_DETAILS']['userID']}'";
+		
+		if(mysqli_num_rows($sql)>0) 
+		{
+			$logo=mysqli_fetch_object($sql);
+			$hasLogo = true;
+		}
+	}
+
+	
+?>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css_2/main_idea.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        function selectMethod(method) {
+            console.log ("option " + method);
+			$('#paymentOption').val(method);
+            $('#frmMethod').submit();
+
+        }
+    </script>
+    <style>
+        @media (min-width: 300px) {
+            .full_content {
+                background-image: url("../shurjopay/images/bg.png");
+                background-repeat: repeat;
+                border-radius: 10px;
+                margin: 5% auto;
+                padding: 4% 1% 1%;
+                width: 90%;
+            }
+
+            .row img {
+                display: block;
+                margin: 10px auto;
+                float: none;
+                width: auto;
+            }
+        }
+
+        @media (min-width: 700px) {
+            .full_content {
+                background-image: url("../images/bg.png");
+                background-repeat: repeat;
+                border-radius: 10px;
+                margin: 5% auto;
+                padding: 4% 1% 1%;
+                width: 58%;
+            }
+
+            .row img {
+                float: left;
+                margin: 0 1%;
+                width: 22.10%;
+            }
+        }
+
+        .paypoint {
+            float: left;
+            margin-bottom: 40px;
+            width: 50%;
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+
+        .surjopay {
+            float: right;
+            left: 4.5%;
+            width: 50%;
+            position: relative;
+            top: 0px !important;
+            box-sizing: border-box;
+            padding: 15px 10px;
+        }
+
+        .surjopay img {
+            max-width: 100%;
+            width: auto;
+            float: inherit;
+
+        }
+
+        .paypoint img {
+            max-width: 100%;
+            width: auto;
+            float: inherit;
+        }
+    </style>
+    <title>shurjoPay</title>
+</head>
+<body>
+<div class="full_content">
+
+    <div class="up_content">
+        <div class="paypoint">
+            <img src="images/shurjopay-logo.png">
+        </div>
+        <div class="surjopay">
+            <?php
+            if ($hasLogo):
+                ?>
+                <img src="./img/merchant_logo/<?php echo $logo->merchant_logo; ?>"/>
+                <?php
+            else:
+                ?>
+                <img src="images/payPoint_logo.png"/>
+                <?php
+            endif;
+            ?>
+        </div>
+    </div>
+
+    <form action="./payment_process.php" method="POST" id="frmMethod">
+        <input type="hidden" name="paymentOption" id="paymentOption"/>
+
+        <div class="main_content">
+
+            <div class="row">
+                Total Amount :: <?php echo $_SESSION['ORDER_DETAILS']['txnAmount']; ?> BDT
+            </div>
+	    <!-- <div class="row"> -->
+
+
+        <?php if(isset($_SESSION['ORDER_DETAILS']['mxID']) and $_SESSION['ORDER_DETAILS']['mxID']!=""){?>
+                        <fieldset class=row>
+                <legend class="title">City Bank</legend>
+                                <a href="javascript:void(0)" onclick="selectMethod('mx')">
+                    <div class="image1"><img src="images/amex.png"></div>
+                </a>
+                <a href="javascript:void(0)" onclick="selectMethod('mx_visa')">
+                    <div class="image1"><img src="images/visa.png"></div>
+                </a>
+                <a href="javascript:void(0)" onclick="selectMethod('mx_master_card')">
+                    <div class="image2"><img src="images/master.png"></div>
+                </a>
+
+            </fieldset>
+                        <?php } ?>
+
+
+
+
+           
+            <?php /*if(isset($_SESSION['ORDER_DETAILS']['eblID'])  and $_SESSION['ORDER_DETAILS']['eblID'] !=""){?>
+
+        	<?php if(substr($_SESSION['ORDER_DETAILS']['uniqID'],0,3) == 'WSA') { ?>
+        		<img src="images/EBL-WASA-Web-Banner-650px-x-100px.jpg" style="width: 86%;mergine-left: 102px;padding-left: 55px;">	
+        	<?php }	?>
+
+            <!--
+            <fieldset class=row>
+                <legend class="title">EBL SKYPAY</legend>                       
+                <a href="javascript:void(0)" name="ebl_visa"  onclick="selectMethod('ebl_visa')">
+                    <div class="image1"><img src="images/visa.png"></div>
+                </a>
+                <a href="javascript:void(0)" onclick="selectMethod('ebl_master')">
+                    <div class="image2"><img src="images/master.png"></div>
+                </a>
+            </fieldset>
+            -->
+            <?php }*/ ?>
+           
+			
+            <!-- </div> -->
+            <?php if(isset($_SESSION['ORDER_DETAILS']['dbblID']) and isset($_SESSION['ORDER_DETAILS']['dbblTerminalID']) and $_SESSION['ORDER_DETAILS']['dbblID']!="" and $_SESSION['ORDER_DETAILS']['dbblTerminalID']!=""){?>
+            <!-- <div class="row"> -->
+	   
+	 
+              <fieldset class=row>
+                <legend class="title">DBBL Cards</legend>
+                <a href="javascript:void(0)" onclick="selectMethod('dbbl_nexus')">
+                    <div class="image1"><img src="images/dbbl-nexus.png"></div>
+                </a>
+		<!--
+                <a href="javascript:void(0)" onclick="selectMethod('dbbl_visa')">
+                    <div class="image2"><img src="images/dbbl-visa.png"></div>
+                </a>
+                <a href="javascript:void(0)" onclick="selectMethod('dbbl_master')">
+                    <div class="image2"><img src="images/master.png"></div>
+                </a>
+		-->
+            </fieldset>
+
+		<!--
+                <fieldset class=row>
+                    <legend class="title">DBBL International</legend>
+                    <a href="javascript:void(0)" onclick="selectMethod('visa')">
+                    <div class="image1"><img src="images/visa.png"></div>
+                </a>
+                <a href="javascript:void(0)" onclick="selectMethod('master_card')">
+                    <div class="image2"><img src="images/master.png"></div>
+                </a>
+	
+                </fieldset>
+		-->       
+            <!-- </div> -->
+            <?php } ?>
+			 <fieldset class=row>
+                <legend class="title">Any Bank Cards</legend>
+                <!--<a href="javascript:void(0)" onclick="selectMethod('visa')">
+                    <div class="image1"><img src="images/visa.png"></div>
+                </a>
+                <a href="javascript:void(0)" onclick="selectMethod('master_card')">
+                    <div class="image2"><img src="images/master.png"></div>
+                </a>-->
+                 <?php if(isset($_SESSION['ORDER_DETAILS']['mxID']) and $_SESSION['ORDER_DETAILS']['mxID']!=""){?>
+				 <a href="javascript:void(0)" onclick="selectMethod('mx_visa')">
+                    <div class="image1"><img src="images/visa.png"></div>
+                </a>
+                <a href="javascript:void(0)" onclick="selectMethod('mx_master_card')">
+                    <div class="image2"><img src="images/master.png"></div>
+                </a>
+                 <?php } ?>
+                <a href="javascript:void(0)" onclick="selectMethod('tbl')">
+                    <div class="image3"><img src="images/q-cash.png"></div>
+                </a>
+				<!-- <a href="javascript:void(0)" onclick="selectMethod('mx')">
+                    <div class="image1"><img src="images/city-bank.png"></div>
+                </a> -->
+            </fieldset>
+			
+			
+            <!-- <div class="row"> -->
+            <fieldset class=row>
+                <legend class="title">Mobile Wallets</legend>
+               	    <a href="javascript:void(0)" onclick="selectMethod('bkash')">
+						<div class="image1"><img src="images/bkash.png"></div>
+					</a>
+				
+					<!--<a href="javascript:void(0)"><div class="image2"><img src="images/dbbl-mobile-banking.png"></div></a>-->
+					<!--<a href="javascript:void(0)"><div class="image3"><img src="images/u-cash.png"></div></a>-->
+					<a href="javascript:void(0)" onclick="selectMethod('mCash_iBank')">
+						<div class="image4"><img src="images/islami-bank-m-cash.png"></div>
+					</a>
+					<a href="javascript:void(0)" name="TBMM" id="TBMM" onclick="selectMethod('tbl')">
+					<div class="image1" style="display:block;">
+						<!--<img src="images/trust-bank-mobile-banking.png">-->
+						<img src="images/logo_tbmm_172x73.png">
+					</div>
+				</a> 
+                <?php if(isset($_SESSION['ORDER_DETAILS']['dbblID']) && isset($_SESSION['ORDER_DETAILS']['dbblTerminalID']) and $_SESSION['ORDER_DETAILS']['dbblID']!=""  and $_SESSION['ORDER_DETAILS']['dbblTerminalID']!=""){?>
+					<a href="javascript:void(0)" onclick="selectMethod('dbbl_mobile')">
+      			        <div class="image1"><img src="images/dbbl-mobile.png"></div>
+                	</a> 
+                <?php } ?>
+            </fieldset>
+            <!-- </div> -->
+		
+			<fieldset class=row>
+				<legend class="title">Trust Bank Cards</legend>
+					<a href="javascript:void(0)"  name="TBL" id="TBL"  onclick="selectMethod('tbl')">
+						<div class="image1">
+							<img src="images/trust-bank.png">
+						</div>
+					</a>	
+			</fieldset>
+            <!-- <div class="row"> -->
+            <fieldset class=row>
+                <legend class="title">Bank Accounts</legend>
+                 <a href="javascript:void(0)" onclick="selectMethod('ibbl')">
+                    <div class="image1"><img src="images/islami-bank.png"></div>
+                </a>
+				
+				<!--<a href="javascript:void(0)" onclick="selectMethod('visa')">
+                    <div class="image1"><img src="images/islami-bank.png"></div>
+                </a>-->
+				
+                <!--<a href="javascript:void(0)" onclick="selectMethod('mtb')"><div class="image1"><img src="images/mtb-bank.png"></div></a>-->
+				<a href="javascript:void(0)" onclick="selectMethod('tbl')"><div class="image1" style="display:none;"><img src="images/trust-bank.png"></div></a>
+            </fieldset>
+            <!-- </div>		 -->
+        </div>
+
+        <div class="copyright">&copy;shurjoPay</div>
+</div>
+</form>
+
+</body>
+</html>

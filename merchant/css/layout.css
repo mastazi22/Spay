@@ -1,0 +1,64 @@
+@charset "utf-8";
+/* CSS Document */
+
+#container {
+	background-color: #FFFFFF;
+	width: 721px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 50px;
+	color: #2F6EBB;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px solid #2F6EBB;
+      
+}
+#main_container {
+
+}
+#warning {
+	text-align: center;
+	color: #FF0000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 40px;
+}
+
+#header {
+	height: 90px;
+}
+#header #banklogo {
+	height: 76px;
+	width: 136px;
+	margin-left: 22px;
+	margin-top: 10px;
+	position: absolute;
+}
+#header #merchantlogo {
+	float: right;
+	margin-right: 12px;
+	margin-top: 6px;
+	position: relative;
+	max-width: 300px;
+	overflow: hidden;
+	height: 75px;
+	width: 300px;
+	text-align: right;
+}
+#shadow {
+	height: 159px;
+	width: 721px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#footer {
+	height: 33px;
+}
+#warning_1 {
+	text-align: justify;
+	color: #FF0000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	line-height: 10px;
+}

@@ -1,0 +1,69 @@
+
+<?php
+
+include("../../includes/configure.php");
+include ('../../includes/session_handler.php');
+function openssl_decrypt_data($post){
+switch($_SERVER["SERVER_NAME"]) {
+case 'localhost':
+ 	define('PUBLIC_KEY', file_get_contents('C:\svn\sp_key\public.pem'));
+	define('PRIVATE_KEY', file_get_contents('C:\svn\sp_key\private.key'));
+	break;
+default:  
+  	define('PUBLIC_KEY', file_get_contents('/etc/sp_key/public.pem'));
+	define('PRIVATE_KEY', file_get_contents('/etc/sp_key/private.key'));
+	break;
+																					}
+$m = json_decode(base64_decode($post), true);
+$data = get_original_data($m['msg'], $m['key'], PRIVATE_KEY);
+$msg_data = json_decode($data, true);		
+return $msg_data['output'];
+		}
+
+function get_original_data($msg, $key, $private_key) {
+if ($msg == '') {
+	return false;
+		} 
+else {
+	$privateKey = openssl_get_privatekey($private_key);
+	$result = openssl_open(base64_decode($msg), $decryptedData, base64_decode($key), $privateKey);
+	return $decryptedData;
+	}
+		}
+$post_vars=openssl_decrypt_data($_POST['output']);
+
+$final_result = explode(':',$post_vars[0]);
+$final_result_ps = explode(':',$post_vars[1]);
+$final_result_code = explode(':',$post_vars[2]);
+$final_result_rrn = explode(':',$post_vars[3]);
+$final_result_4 = explode(':',$post_vars[4]);
+$product_price=$post_vars[14];
+$fraud_status=$post_vars[15];
+$fraud_code=$post_vars[16];
+//print_r($final_result);
+echo($db->local_return_url);
+
+$order_id = $_SESSION['ORDER_DETAILS']['order_id'];
+
+if(trim($final_result[1])=="FAILED"){
+//		dbblFailed($order_id, $final_result,$final_result_ps,$final_result_code,$final_result_rrn,$final_result_4);
+echo("FAIL");
+}
+else{
+	echo("GO");
+//		dbblApproved($order_id, $final_result,$final_result_ps,$final_result_code,$final_result_rrn,$final_result_4);
+}
+//header("Location: ".$db->local_return_url);
+
+exit;
+
+function dbblApproved($order_id, $final_result,$final_result_ps,$final_result_code,$final_result_rrn,$final_result_4) {
+
+
+
+	global $product_price;
+
+	   $date = new DateTime();
+
+		$date->setTimezone(new DateTimeZone("Asia/Dhaka"));
+?>

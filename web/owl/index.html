@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>shurjoPay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/flexslider.css" rel="stylesheet" type="text/css"/>
+    <link href="css/prettyPhoto.css" rel="stylesheet" type="text/css"/>
+    <link href="css/animate.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="owl/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500italic,700,500,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- SCRIPTS -->
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--[if IE]>
+    <html class="ie" lang="en"> <![endif]-->
+
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
+    <script src="js/jquery.nicescroll.min.js" type="text/javascript"></script>
+    <script src="js/superfish.min.js" type="text/javascript"></script>
+    <script src="js/jquery.flexslider-min.js" type="text/javascript"></script>
+    <script src="owl/js/owl.carousel.js" type="text/javascript"></script>
+    <script src="js/animate.js" type="text/javascript"></script>
+    <script src="js/jquery.BlackAndWhite.js"></script>
+    <script src="js/myscript.js" type="text/javascript"></script>
+
+    <script>
+
+        //PrettyPhoto
+        jQuery(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto();
+        });
+
+        //BlackAndWhite
+        $(window).load(function () {
+            $('.client_img').BlackAndWhite({
+                hoverEffect: true, // default true
+                // set the path to BnWWorker.js for a superfast implementation
+                webworkerPath: false,
+                // for the images with a fluid width and height
+                responsive: true,
+                // to invert the hover effect
+                invertHoverEffect: false,
+                // this option works only on the modern browsers ( on IE lower than 9 it remains always 1)
+                intensity: 1,
+                speed: { //this property could also be just speed: value for both fadeIn and fadeOut
+                    fadeIn: 300, // 200ms for fadeIn animations
+                    fadeOut: 300 // 800ms for fadeOut animations
+                },
+                onImageReady: function (img) {
+                    // this callback gets executed anytime an image is converted
+                }
+            });
+        });
+
+    </script>
+
+</head>
+
+<body>
+<!-- PRELOADER -->
+<!--<img id="preloader" src="images/preloader.gif" alt=""/>-->
+<!-- //PRELOADER -->
+<div class="preloader_hide" style="opacity: 1;">
+
+    <!-- PAGE -->
+    <div id="page" style="background-image: url('images/SP website (1).jpg')">
+
+        <!-- HEADER -->
+        <header>
+
+            <!-- MENU BLOCK -->
+            <div class="menu_block">
+
+                <!-- CONTAINER -->
+                <div class="container clearfix">
+
+                    <!-- LOGO -->
+                    <div class="logo pull-left">
+                        <a href="index.html"><img src="images/logo.png" alt=""></a>
+                    </div><!-- //LOGO -->
+                    <!-- MENU -->
+
+                    <div class="pull-right">
+
+                        <nav class="navbar-collapse navmenu center">
+                            <ul class="">
+                                <li class="first scroll_btn active" ><a href="#home">Home</a></li>
+                                <li class="scroll_btn" ><a href="#news">Services</a></li>
+                                <li class="scroll_btn" ><a href="#team">Pricing</a></li>
+                                <li  ><a href="#projects">Clients</a></li>
+
+                                <li class="scroll_btn" ><a href="#events">News and Events</a></li>
+                                <li class="scroll_btn" ><a href="#faq">Faq</a></li>
+                                <li class="scroll_btn" ><a href="#comments">Contact</a></li>
+                            </ul>
+                        </nav>
+
+                    </div><!-- //MENU -->
+                </div><!-- //MENU BLOCK -->
+            </div><!-- //CONTAINER -->
+        </header><!-- //HEADER -->
+        <!-- HOME-->
+
+        <section id="home" class="padbot0">
+
+            <div class="flexslider top_slider" style="height: 304px;">
+                <ul class="slides ">
+                    <li class="slide1 flex-active-slide" >
+                        <div class="slide-header">
+                            <p class="title1 captionDelay6 FromTop">Feel the magic of your transaction</p>
+                        </div>
+                    </li>
+                    <li class="slide2" >
+
+                        <div class="slide-header">
+                            <p class="title1 captionDelay6 FromTop">24/7 Customer Support</p>
+                        </div>
+                    </li>
+                    <li class="slide4">
+                        <div class="slide-header">
+                            <p class="title1 captionDelay6 FromTop">All of your transactions are 3D secured</p>
+                        </div>
+
+                    </li>
+                    <!--<li class="" >
+                        <div class="slide-header">
+                            <p class="title1 captionDelay6 FromTop">Smart Reporting Panel</p>
+                        </div>
+
+                    </li>-->
+                    <li class="slide3">
+                        <div class="slide-header">
+                            <p class="title1 captionDelay6 FromTop">Smooth Transaction</p>
+                        </div>
+
+                    </li>          <!-- VIDEO BACKGROUND -->
+                    <!-- //VIDEO BACKGROUND -->
+                </ul>
+                <ul class="flex-direction-nav container"><li><a class="flex-prev flex-disabled" href="#" tabindex="-1"></a></li><li><a class="flex-next" href="#"></a></li></ul></div>
+            <!-- TOP SLIDER -->
+            <!--//   <div id="carousel">
+                   <ul class="slides">
+                       <li><img src="images/slider/shurjopay_slider2.jpg" alt=""/></li>
+                       <li><img src="images/slider/shurjopay_slider1.jpg" alt=""/></li>
+                       <li><img src="images/slider/shurjopay_slider3.jpg" alt=""/></li>
+                   </ul>
+               </div><!-- //TOP SLIDER -->
+        </section>
+        <section id="about">
+
+            <!-- SERVICES -->
+            <div class="services_block padbot40 animated fadeInUp" data-appear-top-offset="-200" data-animated="fadeInUp">
+
+                <!-- CONTAINER -->
+                <div class="container">
+
+                    <!-- ROW -->
+                    <div class="row">
+                        <div class="col-lg-6 col-md-3 col-sm-6 col-xs-6 col-ss-12 margbot30">
+                            <a class="services_item" href="javascript:void(0);">
+                                <p>shurjoPay Online Payment Gateway</p>
+
+                                <h4> <span>
+We are a Payment Service Operator (PSO) licensee, being one of the first companies granted the license from Bangladesh Bank. shurjoPay (Product of shurjoMukhi Limited) is our online payment gateway that collects payment from consumers or businesses invoiced by the e-merchants. shurjoPay is a universal e-Payment Gateway using which e-merchants can acquire card and mobile wallet transactions in Bangladesh to receive payments on the internet via their online stores. shurjoPay can accept payments by any VISA, MasterCard, AmEx, Diners Club, Nexus or QCash card along with bKash, MCash and Rocket. Prominent organisations including Dhaka WASA, Bangladesh Army, Bangladesh Red Crescent, and Dhaka Stock Exchange are using our gateway.
+</span></h4>
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <img src="images/slider/img2.png">
+                        </div>
+                    </div><!-- //ROW -->
+                </div><!-- //CONTAINER -->
+            </div><!-- //SERVICES -->
+        </section>
+
+        <section id="news">
+
+            <!-- CONTAINER -->
+            <div class="container">
+                <div class="row service-border">
+                    <div>
+
+                        <h2><b>Services</b> Offered</h2>
+                        <div style="padding-bottom: 30px;color: #0C9547;text-align:center">
+                            <span class="triangle">◈</span>
+                        </div>
+
+
+
+                        <p class="service-li service-b">
+                            By developing a secured online payment gateway in Bangladesh, shurjoPay intends to bridge
+                            the gap by acquiring the payment terminal, and making it available to the merchant websites
+                            at an affordable cost. This implies the following:</p>
+                        <div>
+                            <ul class="service-ul">
+
+
+                                <li class="service-li service-b"><img src="images/tick.svg"class="service-image"> shurjoPay will provide access to a payment gateways
+                                    that accept card based payments (such as, Mastercard, Visa,
+                                <span style="padding-left: 40px">AmEx, DBBL-Nexus, bKash, Rocket and Q-Cash) for merchants.</span>
+
+                                </li>
+                                <li class="service-li"><img src="images/tick.svg"class="service-image"> shurjoPay will collect money on behalf of merchants.</li>
+                                <li class="service-li"><img src="images/tick.svg"class="service-image"> As a preferred Merchant Service Provider, we offer reduced
+                                    rates and quick setup.</li>
+
+                                <li class="service-li"><img src="images/tick.svg"class="service-image"> No early-termination fees or long-term contracts to lock you
+                                    into our services.</li>
+
+                                <li class="service-li"><img src="images/tick.svg"class="service-image"> No annual fees, monthly minimums, or hidden fees.</li>
+
+                                <li class="service-li"><img src="images/tick.svg"class="service-image"> Free online access to your account.</li>
+
+                                <li class="service-li"><img src="images/tick.svg"class="service-image"> 24/7 customer support.</li>
+                                <li class="service-li"><img src="images/tick.svg"class="service-image"> Easy and transparent accounting system for each merchant using
+                                    our payment gateway.</b>
+                                </li>
+                                <li class="service-li"><img src="images/tick.svg"class="service-image"> On demand integration. (Extra charges applicable) .</li>
+
+                                <li class="service-li"><img src="images/tick.svg"class="service-image"> E-Commerce website development with payment gateway
+                                    integration.
+                                </li>
+                                <li class="service-li"><img src="images/tick.svg "class="service-image"> School Management system with online tuition fees collection
+                                    system.
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div><!-- //ROW -->
+
+        </section>
+        <section id="">
+
+            <!-- SERVICES -->
+            <div class="services_block padbot40" data-appear-top-offset="-200" data-animated="fadeInUp">
+
+                <!-- CONTAINER -->
+                <div class="container">
+
+                    <!-- ROW -->
+                    <div class="row" style="background-color: #F0F0F0;padding-bottom: 20px">
+
+                        <div class="col-lg-6 col-md-3 col-sm-6 col-xs-6 col-ss-12 margbot30">
+                            <a class="services_item" href="javascript:void(0);">
+                                <h2 style="margin-top: 75px;margin-left: 95px"><b>Easy Integration</b> with eCommerce
+                                    Platforms</h2>
+
+
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <img class="ecomlogo1" src="images/clients/zen-cart-logo.png">
+                            <img class="ecomlogo2" src="images/clients/Magento.svg.png">
+                            <img class="ecomlogo3" src="images/clients/oscommerce.png">
+                            <img class="ecomlogo2" src="images/clients/vm-logo-220.png">
+                            <img class="ecomlogo5" src="images/clients/ecommerce.gif">
+                        </div>
+
+                    </div><!-- //ROW -->
+                    <img src="images/clients/logo.png">
+                </div><!-- //SERVICES -->
+            </div>
+        </section>
+
+
+        <section id="team">
+
+            <!-- CONTAINER -->
+            <div class="container">
+                <h2><b>Pricing</b></h2>
+                <div style="padding-bottom: 30px;color: #0C9547;text-align:center">
+                    <span class="triangle">◈</span>
+                </div>
+
+                <!-- ROW -->
+                <div class="row animated fadeInUp" data-appear-top-offset="-200" data-animated="fadeInUp">
+
+                    <!-- TEAM SLIDER -->
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div>
+                            <div>
+                                <h3><strong>
+                                    Category
+                                </strong></h3>
+                            </div>
+
+                            <h4>
+
+                                <ul class="ul-li2">
+
+                                    <li>
+                                        Signup Fee
+                                    </li>
+                                    <li> Integration Charge (If applicable)</li>
+                                    <li> Monthly Maintenance fee</li>
+                                    <li style="padding: 0"> Local/International Cards (Visa/Master/nexus)</li>
+                                    <li> Amex/Diners club</li>
+                                    <li> Mobile Banking</li>
+
+
+                                </ul>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div>
+                            <div>
+                                <h3><strong>
+                                    shurjoPay SMEs
+                                </strong></h3>
+                            </div>
+
+
+                            <ul class="ul-li2">
+
+                                <li>
+                                    5,000
+                                </li>
+                                <li> 10,000</li>
+                                <li> 500</li>
+                                <li> 3%</li>
+                                <li> 4%</li>
+                                <li> 2.5%</li>
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div>
+                            <div>
+                                <h3><strong>
+                                    shurjoPay B2B
+                                </strong></h3>
+                            </div>
+
+                            <h4>
+
+                                <ul class="ul-li2">
+
+                                    <li> 20,000 (5 websites)</li>
+                                    <li> 10,000</li>
+                                    <li> 2,000 (5)</li>
+                                    <li> 3%</li>
+                                    <li> 4%</li>
+                                    <li> 2.5%</li>
+
+                                </ul>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div>
+                            <div>
+                                <h3><strong>
+                                    shurjoPay Premium
+                                </strong></h3>
+                            </div>
+
+                            <h4>
+
+                                <ul class="ul-li2">
+
+                                    <li> 10,000*</li>
+                                    <li> 10,000</li>
+                                    <li>Negotiable</li>
+                                    <li> 2.5%</li>
+                                    <li> 3.5%</li>
+                                    <li> 2.5%</li>
+
+                                </ul>
+                            </h4>
+                        </div>
+                    </div>
+                </div><!-- //ROW -->
+            </div><!-- //CONTAINER -->
+        </section>
+        <section id="projects">
+            <div class="container">
+                <h2 style="margin-top: 50px;"><b>Clients</b></h2>
+                <div style="padding-bottom: 30px;color: #0C9547;text-align:center">
+                    <span class="triangle">&#9672;</span>
+                </div>
+            </div><!-- //CONTAINER -->
+            <div class="projects-wrapper" data-appear-top-offset="-200" data-animated="fadeInUp">
+                <!-- PROJECTS SLIDER -->
+                <div class="owl-demo owl-carousel projects_slider">
+
+                    <!-- work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/paypoint.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="https://paypoint.shurjorajjo.com.bd/paypointnewdesign/">payPoint</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/shurjorajjo.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="https://shurjorajjo.com.bd/">shurjoRajjo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/qmusic.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="https://qineticmusic.com/">Qmusic</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/zaman-it.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="https://zaman-it.com/">Zaman-it</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/sean-publications.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://www.seanpublication.com/">Sean-publications</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/dse.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://www.dsebd.org/">Dhaka Stock Exchange</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/wasa_home_button.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://info.dwasa.org.bd/wasapay/">WASA</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/red-crescent-society.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://www.bdrcs.org/donate">Bangladesh Red Cross Society (BRCS)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/waly-park.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://www.biomed.com.bd/">Waly Park</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/bisc.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://bisc.shurjoems.com/">Bangladesh International School & College</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                </div><!-- //PROJECTS SLIDER -->
+                <div class="owl-demo owl-carousel projects_slider">
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/transcom.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href=" ">Transcom</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/shobbai,.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="https://shobbai.com/">Shobbai</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/gateway-bd.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://www.gatewaybd.org/">Gateway</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/wafi-life.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://www.wafilife.com/">Wafi life</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/OO.com.bd.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://www.oo.com.bd/">OO.com.bd</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/toys.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="https://paypoint.shurjorajjo.com.bd/paypointnewdesign/toysryours"> Toys R Yours</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/bangladesh_army_home_button.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://joinbangladesharmy.army.mil.bd/current-jobs">Bangladesh Army</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/ittefaq-logo.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="http://paypoint.ittefaq.com.bd/">Ittefaq</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+                    <div class="item">
+                        <div class="work_item">
+                            <div class="work_img">
+                                <img src="images/works/cccl.png">
+                            </div>
+                            <div class="work_description">
+                                <div class="work_descr_cont">
+                                    <a href="https://paypoint.shurjorajjo.com.bd/cccl/">Cadet College Club Limited</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- //work1 -->
+
+                    <!-- work2 -->
+
+                </div><!-- //PROJECTS SLIDER -->
+            </div>
+
+
+        </section><!-- //PROJECTS -->
+
+
+        <!-- //PROJECTS -->
+        <!-- PROJECTS -->
+        <!-- NEWS -->
+
+
+        <section id="events">
+
+            <!-- SERVICES -->
+            <div class="services_block padbot40" data-appear-top-offset="-200" data-animated="fadeInUp">
+
+                <!-- CONTAINER -->
+                <div class="container">
+
+                    <!-- ROW -->
+                    <div class="row">
+
+                        <h2><b>News & Events</b></h2>
+                        <div style="padding-bottom: 30px;color: #0C9547;text-align:center">
+                            <span class="triangle">&#9672;</span>
+                        </div>
+<div class="row">
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+
+        <img src="images/clients/logo/nederland.jpg">
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal1">Read More</button>
+        <!-- Modal -->
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+
+        <img src="images/clients/logo/24.jpg" >
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal8">Read More</button>
+
+        <!-- Modal -->
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+
+        <img src="images/clients/logo/trust_bank.jpg">
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Read More</button>
+        <!-- Modal -->
+
+    </div>
+</div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+
+                                <img src="images/clients/logo/pp-fb-banner1.jpg" >
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal4">Read More</button>
+
+                                <!-- Modal -->
+
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+
+                                <img src="images/clients/logo/image_984_237960.jpg">
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal5">Read More</button>
+
+                                <!-- Modal -->
+
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+
+                                <img src="images/clients/logo/bdarmy.jpg"  >
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal9">Read More</button>
+
+                                <!-- Modal -->
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div><!-- //ROW -->
+            </div><!-- //CONTAINER -->
+        </section>
+
+        <section id="faq">
+            <!-- CONTAINER -->
+            <div class="container">
+
+                <div class="row">
+                    <div>
+
+                        <h2><b>FAQ </b></h2>
+                        <div style="padding-bottom: 30px;color: #0C9547;text-align:center">
+                            <span class="triangle">&#9672;</span>
+                        </div>
+                        <div>
+                            <button class="accordion">What do I need to register for shurjoPay Payment Gateway?</button>
+                            <div class="panel">
+                                <p>The following documents are required to register for shurjoPay Payment Gateway:
+                                </p>
+                                <ul class="ul-li3">
+                                    <li><i class="fa fa-check-square-o"></i> shurjoPay prescribed Application Format to
+                                        be filled and signed by authorized person
+                                    </li>
+                                    <li><i class="fa fa-check-square-o"></i> shurjoPay Terms & Condition Acceptance Form
+
+                                    </li>
+                                    <li><i class="fa fa-check-square-o"></i> Trade License Copy</li>
+                                    <li><i class="fa fa-check-square-o"></i>Sub Merchant Agreement on legal paper with a
+                                        legal stamp of BDT 300
+
+                                    </li>
+                                    <li><i class="fa fa-check-square-o"></i> Recent 2 copies photograph
+
+                                    </li>
+                                    <li><i class="fa fa-check-square-o"></i> TIN / VAT certificate
+                                    </li>
+                                    <li><i class="fa fa-check-square-o"></i> Copy of National Id
+
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <button class="accordion">Does Shurjopay Payment Gateway provide API SDK to its merchants?
+                            </button>
+                            <div class="panel">
+
+                                <p>shurjoPay does not provide any SDK to its merchants but provide API and integrates
+                                    the gateway in merchant website.
+                                </p>
+
+                            </div>
+
+                            <button class="accordion">Can the merchant use the gateway in multiple websites?</button>
+                            <div class="panel">
+                                <p>If the merchant wants to use the payment gateway in more than one website then he has
+                                    to register separately for each website. For each website a separate merchant id
+                                    will be given to the merchant.
+
+                                </p>
+                            </div>
+                            <button class="accordion">Can the gateway be integrated in applications?</button>
+                            <div class="panel">
+                                <p>The gateway can be integrated in any web-based applications or mobile (android/ios)
+                                    or desktop applications.</p>
+                            </div>
+                            <button class="accordion">How can the merchants receive money transferred through the
+                                payment gateway?
+                            </button>
+                            <div class="panel">
+                                <p>The transferred money will be kept in the MSP bank account and will be released only
+                                    after proper authentication and verification of transaction details as per the
+                                    requirements of the merchant.
+
+                            </div>
+                            <button class="accordion">
+                                How often can the payments be withdrawn from gateway service provider?
+
+                            </button>
+                            <div class="panel">
+                                <p>The payments can be withdrawn on a weekly basis (once every week).
+                                </p>
+                            </div>
+                            <button class="accordion"> Is shurjoPay Payment Gateway Secured?</button>
+                            <div class="panel">
+                                <p>shurjoPay is in trusted affiliation with numerous renowned banks. The bank works with
+                                    us after proper verification and validation of our server.
+
+                            </div>
+                            <button class="accordion">
+                                Do the people who work at shurjoPay have any access to the credit card numbers that are
+                                used for credit transfers?
+
+                            </button>
+                            <div class="panel">
+                                <p>No, only the banks can have access to credit card numbers. shurjoPay does not handle
+                                    the credit card numbers. Only the first six digits and last four digits of the cards
+                                    can be visible to shurjoPay in the payment papers.
+
+                            </div>
+                            <button class="accordion">
+                                Can the shurjoPay Payment Gateway be used for International Transactions?
+
+                            </button>
+                            <div class="panel">
+                                <p>shurjoPay payment gateway can be used to send and receive credit to and from local
+                                    sources. In case of international transactions the payments can only be received and
+                                    not sent as per the rules of Bangladesh Bank. Which means products can be sold to
+                                    both local and international customers with shurjoPay payment gateway.
+
+                            </div>
+                            <button class="accordion">
+                                Does the merchant require a separate bank account to avail shurjoPay Payment Gateway?
+
+                            </button>
+                            <div class="panel">
+                                <p>The merchant does not need to have a separate bank account for using shurjoPay
+                                    payment gateway. The collective funds will be transferred to merchants personal
+                                    account after verification process.
+
+                            </div>
+                            <button class="accordion">Are there any refund or customer dispution policies of shurjoPay?
+                            </button>
+                            <div class="panel">
+                                <p>If a customer or a merchant files a dispute or demands refund the money will be
+                                    refunded depending on the authenticity and verification of the credit documents and
+                                    legitimacy of claims.
+
+                            </div>
+                            <button class="accordion">
+                                If a foreign customer makes payment in their local currency would it be received in the
+                                merchant end?
+
+                            </button>
+                            <div class="panel">
+                                <p>The customer can make payment in any currency of his choice and the merchant can also
+                                    receive payment in any currency of his choice. Currency exchange rates may have an
+                                    effect on the receivable amount of payment.
+
+                            </div>
+                        </div>
+                        <script>
+                            var acc = document.getElementsByClassName("accordion");
+                            var i;
+
+                            for (i = 0; i < acc.length; i++) {
+                                acc[i].onclick = function () {
+                                    this.classList.toggle("active");
+                                    var panel = this.nextElementSibling;
+                                    if (panel.style.maxHeight) {
+                                        panel.style.maxHeight = null;
+                                    } else {
+                                        panel.style.maxHeight = panel.scrollHeight + "px";
+                                    }
+                                }
+                            }
+                        </script>
+
+                    </div>
+                </div><!-- //ROW -->
+
+            </div><!-- TESTIMONIAL1 -->
+            <!-- OUR CLIENTS -->
+            <!-- //OUR CLIENTS -->
+            <!-- //CONTAINER -->
+        </section><!-- //NEWS -->
+
+        <section id="comments">
+            <!-- FOOTER -->
+            <footer>
+
+                <!-- CONTAINER -->
+                <div class="container">
+
+                    <!-- ROW -->
+                    <div class="row">
+                        <div class="col-sm-3" style="text-align: left;margin-top: 85px;">
+
+
+                            <h4><b>Address</b></h4>
+                            <ul class="ul-li4">
+                                <li class="ul-li4">
+
+                                    <i class="material-icons" style="font-size:14px">&#xe0c8;</i>
+                                        <b>shurjoMukhi Limited</b>
+                                </li>
+                                <li class="ul-li4">
+                                    <span style="margin-left: 17px"> House # 320 (6th floor)<br></span>
+                                    <span style="margin-left: 17px"> Road # 21, Mohakhali DOHS <br></span>
+                                   <span style="margin-left: 17px"> Dhaka: 1206, Bangladesh. <br></span>
+                                </li>
+                                <li class="ul-li4"><i class="material-icons" style="font-size:14px">email</i>
+                                    shurjopay@shurjomukhi.com.bd
+                                </li>
+                                <i class="material-icons"style="font-size:14px">&#xe0b0; </i>
+                                    <span style="padding-bottom: 6px"> Phone: +88 02 988 7202 </span><br>
+                                    <span style="margin-left: 17px">  8 am-8 pm (every days in a week)</span><br>
+                                </li>
+                                <i style="font-size:14px;margin-left: 4px;" class="fa">&#xf10b;</i>
+                                    <span style="margin-left: 5px">
+                                        Mobile:+88 18 4019 7207(24/7)
+                                    </span>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+
+                            <h2><b>CONTACT US</b></h2>
+                            <!-- CONTACT FORM -->
+                            <form>
+                                <div class="row">
+                                    <div class="row">
+                                    <div class="col-sm-4"><label > </label>
+                                        <input class="form-control"  type="text" placeholder="Name"></div>
+                                    <div class="col-sm-4"><label > </label>
+                                        <input class="form-control"  type="text" placeholder="Email"></div>
+                                    <div class="col-sm-4"><label > </label>
+                                        <input class="form-control"  type="text" placeholder="Mobile"></div>
+                                    </div>
+<div class="row">
+<div class="col-sm-12">
+                                     <textarea name="txtmessage" placeholder="Message" style="width:100%;border-radius: 3px;border-color: #9A9A9A;margin-top: 18px;height: 110px;"></textarea>
+</div>
+</div>
+                                    <button type="button" class="btn btn-success">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-3 col-xl-3">
+
+                            <div class="icon">
+                                <a href="https://www.facebook.com/shurjoPay/" target="_blank" class="fa fa-facebook-square" style="color:#5161AE;font-size: 36px;float: left" href=" "></a>
+                                </div>
+                            <div class="ic">
+                                <a href="https://www.youtube.com/channel/UCbrHa3W_TcfL7gS0h2Jy-1Q" target="_blank" class="fa fa-youtube-square" style="font-size:36px;color:#EB3618;float: right" href=" "></a>
+                            </div>
+                        </div><!-- //CONTACT FORM -->
+
+                        <!--<iframe style="height:400px;width:100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.996898343183!2d90.39115321456244!3d23.783124784573257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!3m2!1sen!2sbd!4v1486375933348"-->
+                        <!--width="100%"  frameborder="0" style="border:0" allowfullscreen></iframe>-->
+                    </div><!-- //ROW -->
+
+                    <div class="row copyright">
+
+                        <div class="footer">
+                            <h6><span class="fs"> Developed By , Shurjomukhi Limited @2017</span></h6>
+
+                        </div>
+
+                    </div><!-- //ROW -->
+                </div><!-- //CONTAINER -->
+            </footer><!-- //FOOTER -->
+
+        </section>
+
+
+        <iframe style="height:400px;width:100%"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.996898343183!2d90.39115321456244!3d23.783124784573257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7697b7bd9af%3A0x79b4f0b6293e031!2sshurjoMukhi+Ltd!5e0!3m2!1sen!2sbd!4v1486375933348"
+                width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <!-- MAP -->
+        <!--<div id="map">-->
+        <!--<a class="map_hide" href="javascript:void(0);" ><i class="fa fa-angle-right"></i><i class="fa fa-angle-left"></i></a>-->
+        <!--<iframe src="http://maps.google.com/maps?f=q&amp;give%20a%20hand=s_q&amp;hl=en&amp;geocode=&amp;q=london&amp;sll=37.0625,-95.677068&amp;sspn=42.631141,90.263672&amp;ie=UTF8&amp;hq=&amp;hnear=London,+United+Kingdom&amp;ll=51.500141,-0.126257&amp;spn=0.026448,0.039396&amp;z=14&amp;output=embed" ></iframe>-->
+        <!--</div>&lt;!&ndash; //MAP &ndash;&gt;-->
+
+    </div>
+    <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Shurjomukhi Limited participated in NTF III @Netherlands </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Shurjomukhi's CEO Mr. Fida Haq is participating in a business meeting with counterparts from
+                        European at Rotterdam, the Netherlands.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ShurjoMukhi Limited received ISO 9001:2008 Certificate </h4>
+                </div>
+                <div class="modal-body">
+                    <p>ShurjoMukhi is an ISO 9001 compliant software outfit with strict adherence to stringent quality
+                        control processes
+                        during production of apps and games. Starting from unit testing, end-to-end module testing and
+                        overall testing of the system are
+                        de rigueur at the company with many hours of tests and analysis performed on products before
+                        they hit the app markets.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal3" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Trust Bank signs with ShurjoMukhi Ltd for Developing Mobile App Based
+                        CMDSS </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Scoping, designing, building, testing, installing, helping Trust Bank Limited to put into
+                        operation the mobile app based
+                        Cash management Decision Support System through which Trust Bank could determine the cash
+                        position of thousands of its pay
+                        point agents who provide service to public for mobile financial services and providing the
+                        agents access to information,
+                        planning tool, a platform for contacting others within the vertical delivery chain. We have
+                        completed and delivered the
+                        first phase of the project. The project is funded by UK’s DFID and is managed by Nathan
+                        Associates of London under the
+                        Business Finance for the Poor in Bangladesh (BFP-B) challenge fund.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal4" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ShurjoMukhi Limited @ Digital World 2016 </h4>
+                </div>
+                <div class="modal-body">
+                    <p>ShurjoMukhi Limited participated in “Digital World 2016” for product showcasing, hold on October
+                        19th -21nd,
+                        2016 at International Convention City Bashundhara, Dhaka. We have showcased our products: Pay
+                        Point, Shurjo Pay,
+                        Shurjo School Management System, Hatekhor-2 ( Android App ), BCS Master ( Android App ) to
+                        visitors..</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal5" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Mutual Trust Bank signs with ShurjoMukhi Ltd for Online Merchant Payment
+                        Service </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Mutual Trust Bank Limited (MTBL) signed an agreement with ShurjoMukhi for online merchant payment
+                        service through MTB’s
+                        Internet Banking at the bank’s corporate head office at Gulshan in Dhaka recently. As per the
+                        agreement, the Internet
+                        Banking customers of the bank will be able to purchase different products and services offered
+                        by the merchants affiliated
+                        with ShurjoMukhi. In addition, MTB Internet Banking users can book tickets of local airline
+                        companies, make hotel
+                        reservations, order food from restaurants, top-up airtime, do online shopping etc.
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal6" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ShurjoMukhi Limited developing online School Management System for
+                        BISC </h4>
+                </div>
+                <div class="modal-body">
+                    <p>ShurjoMukhi Limited developed online School Management System for Bangladesh International School
+                        & College (BISC),
+                        it’s an English Medium institution managed by Bangladesh Army Headquarters, Dhaka Cantonment.
+                        This college is one of the
+                        most prestigious institutions in the country with around 2500 students from Nursery to A level &
+                        HSC. With this school
+                        management system school can manage their entire administrative task through online and can
+                        generate all data and report
+                        automatically..</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal7" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">FREE SMS Service to UISC Entrepreneurs </h4>
+                </div>
+                <div class="modal-body">
+                    <p>An initiative has been taken to send free SMS for all the entrepreneurs of Union Information &
+                        Service Centre (UISC) of
+                        Bangladesh. A Memorandum of Understanding (MoU) was signed yesterday by Local Government
+                        Division (LGD), ShurjoMukhi Limited
+                        and UNDP supported Access to Information (A2I) Programme of Prime Minister's Office to provide
+                        free SMS facility for UISC
+                        entrepreneurs.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal8" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Agreement with Banglalion Communications Ltd </h4>
+                </div>
+                <div class="modal-body">
+                    <p>payPointTM -a payment gateway and a concern of shurjomukhi Ltd, had signed an agreement with
+                        Banglalion Communications Ltd.
+                        Under this agreement, Banglalion users are entitled to enjoy online purchase both prepaid &
+                        postpaid cards (without any
+                        extra charge) from payPoint.com.bd</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal9" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Liaison with Bangladesh Army </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Web link of Bangladesh Army has integrated with payPaypoint.com.bd from 27th June2012. It means,
+                        anyone can join Bangladesh Army
+                        and pay for the application procedure from payPaypoint.com.bd</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="myModal10" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Pohela Boishakh Celebration @shurjoBarta </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Teletalk the state-owned mobile operator has commenced online Telecharge at payPointTM
+                        (paypoint.com.bd). An official launching program was
+                        held on July 8 2012, which was organized jointly by Teletalk and shurjoMukhi Ltd. Posts and
+                        telecommunications Minister Rajiuddin Ahmed
+                        Raju inaugurated the occasion as a chief guest while NI Khan, Secretary, MoICT, Sunil Kanti
+                        Bose, Secretary, Ministry of Posts &
+                        telecommunications, Major General Zia Ahmed, PSC (retd), Chairman BTRC, was special guests at
+                        the event.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal11" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Successfully launched the Teletalk Telecharge @payPoint Ceremony </h4>
+                </div>
+                <div class="modal-body">
+                    <p>Teletalk the state-owned mobile operator has commenced online Telecharge at payPointTM
+                        (paypoint.com.bd).
+                        An official launching program was held on July 8 2012, which was organized jointly by Teletalk
+                        and shurjoMukhi Ltd.
+                        Posts and telecommunications Minister Rajiuddin Ahmed Raju inaugurated the occasion as a chief
+                        guest while NI Khan, Secretary, MoICT,
+                        Sunil Kanti Bose, Secretary, Ministry of Posts & telecommunications, Major General Zia Ahmed,
+                        PSC (retd), Chairman BTRC, was special
+                        guests at the event.
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal12" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Balaka Cineworld Tickets on shurjoMukhi payPoint </h4>
+                </div>
+                <div class="modal-body">
+                    <p>From January 25, 2013 shurjoMukhi is selling Balaka Cineworld Tickets online at payPointTM.
+                        An agreement has been signed between Balaka Cineworld and shurjoMukhi Limited. Under the
+                        agreement, customers from any part
+                        of Bangladesh can now buy Balaka Cineworld through Pay & Buy web portal paypoint.com.bd.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal13" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">shurjoMukhi is the Associate Partner of eCommerce Week 2013 </h4>
+                </div>
+                <div class="modal-body">
+                    <p>shurjoMukhi Limited is the Associate Partner of the eCommerce Week 2013 organized jointly by
+                        BASIS and Bangladesh Bank.
+                        The week starts on 5th Jan 2013 and continues up to 12th Jan 2013.
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal14" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">E-Asia 2011 </h4>
+                </div>
+                <div class="modal-body">
+                    <p>shurjoMukhi had participated in the E-Asia 2011, at Bangabandhu International Conference Centre,
+                        Dhaka, from Thu, December 1
+                        to Sat, December 3, 2011. Please visit us at stall M-30.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

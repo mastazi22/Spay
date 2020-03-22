@@ -1,0 +1,361 @@
+<?php
+/**
+ * Decrypt Transaction info recieved from IPG server
+ * PHP version 4 and 5
+ * @author    Sanjeewa Jayasinghe <sanjeewaj@interblocks.com>
+ * @copyright Interblocks - http://www.interblocks.com
+ *
+ * Source adopted by Shurjomukhi developers from BRAC sample
+ * @author: 
+ * 	1. Sahedul Hasan <sahedul.hasan@shurjomukhi.com.bd>
+ * 	2. Shouro Chowndhury <shouro.chowdhury@shurjomukhi.com.bd>
+ * 	3. Imtiaz Rahi <imtiaz.rahi@shurjomukhi.com.bd>
+ *  4. Zahid Hossain Chowdhury <zahid@shurjomukhi.com.bd>
+ */
+
+include("../../includes/configure.php");
+include ('../../includes/session_handler.php');
+
+/* Initializing IPG client IP, port and socket variables */
+$IPGClientIP = '127.0.0.1';
+$IPGClientPort = "10000";
+
+$ERRNO = "";
+$ERRSTR = "";
+$SOCKET_TIMEOUT = 2;
+$IPGSocket = "";
+
+$EncryptedReceipt = "";
+$DecryptedReceipt = "";
+
+$error_message = "";
+$encrypted_rcpt_sent_error = "";
+$encryptedRcpt_ERR = "";
+$decryptedRcpt_ERR = "";
+
+$EncryptedReceipt = $_POST["encryptedReceiptPay"];
+
+if ($EncryptedReceipt == "") {
+  $error_message .= "Could not find Encrypted Receipt";
+  $encryptedRcpt_ERR = true;
+}
+
+
+/* Step 1 : Create the socket connection with IPG client */
+if (!$encryptedRcpt_ERR) {
+  if ($IPGClientIP != "" && $IPGClientPort != "") {
+    $IPGSocket = fsockopen($IPGClientIP, $IPGClientPort, $ERRNO, $ERRSTR, $SOCKET_TIMEOUT);
+  } else {
+    $error_message = "Could not establish a socket connection for given IPGClientIP = ". $IPGClientIP . "and IPGClientPort = ".$IPGClientPort; 
+    $socket_creation_err = true;
+  }      
+}
+    
+/* Step 2 : Send Encrypted Receipt to IPG client */
+if (!$socket_creation_err && !$encryptedRcpt_ERR) {
+  socket_set_timeout($IPGSocket, $SOCKET_TIMEOUT);
+
+  // Write the encrypted receipt to socket connection
+  if (fwrite($IPGSocket,$EncryptedReceipt) === false) {
+    $error_message .= "Encrypted Receipt could not be written to socket connection";
+    $encrypted_rcpt_sent_error = true;
+  }
+}
+
+/* Step 3 : Recieve the decrypted Receipt from IPG client */
+if (!$socket_creation_err && !$encrypted_rcpt_sent_error) {
+  while (!feof($IPGSocket)) {
+    $DecryptedReceipt .= fread($IPGSocket, 8192);
+  }    
+}
+    
+/* Step 4 : Close the socket connection */
+if(!$socket_creation_err) fclose($IPGSocket);
+
+/* Step 5 : Process $DecryptedReceipt */
+$Error_code = "";
+$Error_msg = "";
+$Acc_No = "";
+$Action = "";
+$Bank_ref_ID = "";
+$Currency = "";
+$IPG_txn_ID = "";
+$Lang = "";
+$Merchant_txn_ID = "";
+$Merchant_var1 = "";
+$Merchant_var2 = "";
+$Merchant_var3 = "";
+$Merchant_var4 = "";
+$Name = "";
+$Reason = "";
+$Transaction_amount = "";
+$Transaction_status = "";
+
+    if (!(strpos($DecryptedReceipt, '<error_code>') === false && strpos($DecryptedReceipt, '</error_code>') === false && strpos($DecryptedReceipt, '<error_msg>') === false && strpos($DecryptedReceipt, '</error_msg>') === false)) {
+    	$decryptedRcpt_ERR = true;
+        
+        $Error_code = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<error_code>')+12), (strpos($DecryptedReceipt, '</error_code>') - (strpos($DecryptedReceipt, '<error_code>')+12)));
+    
+        $Error_msg = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<error_msg>')+11), (strpos($DecryptedReceipt, '</error_msg>') - (strpos($DecryptedReceipt, '<error_msg>')+11)));
+    
+    } 
+    else {
+        if (!(strpos($DecryptedReceipt, '<acc_no>') === false && strpos($DecryptedReceipt, '</acc_no>') === false)) {
+            $Acc_No = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<acc_no>')+8), (strpos($DecryptedReceipt, '</acc_no>') - (strpos($DecryptedReceipt, '<acc_no>')+8)));
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<action>') === false && strpos($DecryptedReceipt, '</action>') === false)) {
+            $Action = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<action>')+8), (strpos($DecryptedReceipt, '</action>')-(strpos($DecryptedReceipt, '<action>')+8)));
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<bank_ref_id>') === false && strpos($DecryptedReceipt, '</bank_ref_id>') === false)) {
+            $Bank_ref_ID = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<bank_ref_id>')+13), (strpos($DecryptedReceipt, '</bank_ref_id>')-(strpos($DecryptedReceipt, '<bank_ref_id>')+13)));
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<cur>') === false && strpos($DecryptedReceipt, '</cur>') === false)) {
+            $Currency = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<cur>')+5),(strpos($DecryptedReceipt, '</cur>')-(strpos($DecryptedReceipt, '<cur>')+5)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<ipg_txn_id>') === false && strpos($DecryptedReceipt, '</ipg_txn_id>') === false)) {
+            $IPG_txn_ID = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<ipg_txn_id>')+12),(strpos($DecryptedReceipt, '</ipg_txn_id>')-(strpos($DecryptedReceipt, '<ipg_txn_id>')+12)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<lang>') === false && strpos($DecryptedReceipt, '</lang>') === false)) {
+            $Lang = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<lang>')+6),(strpos($DecryptedReceipt, '</lang>')-(strpos($DecryptedReceipt, '<lang>')+6)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<mer_txn_id>') === false && strpos($DecryptedReceipt, '</mer_txn_id>') === false)) {
+            $Merchant_txn_ID = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<mer_txn_id>')+12),(strpos($DecryptedReceipt, '</mer_txn_id>')-(strpos($DecryptedReceipt, '<mer_txn_id>')+12)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<mer_var1>') === false && strpos($DecryptedReceipt, '</mer_var1>') === false)) {
+            $Merchant_var1 = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<mer_var1>')+10),(strpos($DecryptedReceipt, '</mer_var1>')-(strpos($DecryptedReceipt, '<mer_var1>')+10)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<mer_var2>') === false && strpos($DecryptedReceipt, '</mer_var2>') === false)) {
+            $Merchant_var2 = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<mer_var2>')+10),(strpos($DecryptedReceipt, '</mer_var2>')-(strpos($DecryptedReceipt, '<mer_var2>')+10)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<mer_var3>') === false && strpos($DecryptedReceipt, '</mer_var3>') === false)) {
+            $Merchant_var3 = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<mer_var3>')+10),(strpos($DecryptedReceipt, '</mer_var3>')-(strpos($DecryptedReceipt, '<mer_var3>')+10)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<mer_var4>') === false && strpos($DecryptedReceipt, '</mer_var4>') === false)) {
+            $Merchant_var4 = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<mer_var4>')+10),(strpos($DecryptedReceipt, '</mer_var4>')-(strpos($DecryptedReceipt, '<mer_var4>')+10)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<name>') === false && strpos($DecryptedReceipt, '</name>') === false)) {
+            $Name = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<name>')+6),(strpos($DecryptedReceipt, '</name>')-(strpos($DecryptedReceipt, '<name>')+6)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<reason>') === false && strpos($DecryptedReceipt, '</reason>') === false)) {
+            $Reason = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<reason>')+8),(strpos($DecryptedReceipt, '</reason>')-(strpos($DecryptedReceipt, '<reason>')+8)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<txn_amt>') === false && strpos($DecryptedReceipt, '</txn_amt>') === false)) {
+            $Transaction_amount = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<txn_amt>')+9),(strpos($DecryptedReceipt, '</txn_amt>')-(strpos($DecryptedReceipt, '<txn_amt>')+9)) );
+        }
+        
+        if (!(strpos($DecryptedReceipt, '<txn_status>') === false && strpos($DecryptedReceipt, '</txn_status>') === false)) {
+            $Transaction_status = substr($DecryptedReceipt, (strpos($DecryptedReceipt, '<txn_status>')+12),(strpos($DecryptedReceipt, '</txn_status>')-(strpos($DecryptedReceipt, '<txn_status>')+12)) );
+        }    
+    }
+    
+    $order_id = $_SESSION['ORDER_DETAILS']['order_id'];
+    if($Transaction_status == "ACCEPTED" and trim($Merchant_txn_ID) == trim($_SESSION['ORDER_DETAILS']['bank_tx_id']) and ($_SESSION['ORDER_DETAILS']['txnAmount']*100)==($Transaction_amount*100)){
+    	bracApproved($order_id,$Transaction_amount,$Transaction_status,$DecryptedReceipt,$Name,$Acc_No);
+    }
+    else{
+    	bracRejected($order_id,$Transaction_amount,$Transaction_status,$DecryptedReceipt,$Name,$Acc_No);
+    }
+    header("Location: ".$db->local_return_url);
+    exit;
+
+function bracApproved($order_id,$Transaction_amount,$Transaction_status,$DecryptedReceipt,$Name,$Acc_No) {
+	$date = new DateTime();
+	$date->setTimezone(new DateTimeZone("Asia/Dhaka"));
+
+	$_SESSION['order_details_response']['txID'] = $_SESSION['ORDER_DETAILS']['uniqID'];
+	$_SESSION['order_details_response']['bankTxID'] = $order_id;
+	
+	
+	$_SESSION['order_details_response']['bankTxStatus'] = "SUCCESS";
+	
+	
+	$_SESSION['order_details_response']['txnAmount'] = $Transaction_amount;
+
+	$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT * from sp_bankinfo WHERE gw_name='brac' and return_code='000'");
+	$result = mysql_fetch_object($sql_query);
+
+	$_SESSION['order_details_response']['spCode'] = $result->return_code;
+	$_SESSION['order_details_response']['spCodeDes'] = $result->return_status;
+
+	$bank_data = $DecryptedReceipt;
+
+	$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_epay SET gw_return_id='".$_SESSION['order_details_response']['spCode']."', gw_return_msg='".$_SESSION['order_details_response']['spCodeDes']."', gw_time='".$date->format('Y-m-d H:i:s')."', return_code='".$result->return_code."', bank_status='SUCCESS', card_holder_name='".$Name."', card_number='".$Acc_No."', bank_response='".$bank_data."' WHERE order_id='".$order_id."'");
+	$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_payments SET epa;res_time='".$date->format('Y-m-d H:i:s')."', epay_status='".$_SESSION['order_details_response']['spCode']."', epay_status_text='".$_SESSION['order_details_response']['spCodeDes']."' WHERE tc_txid='".$order_id."'");
+	$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "INSERT INTO sp_brac_transactions SET transaction_id='".$order_id."', posted_xml_data='".$bank_data."', transaction_time='".$date->format('Y-m-d H:i:s')."'");
+	
+	$sql_card_allow = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT card_number from sp_cards_allow WHERE card_number='".$Acc_No."' AND status='1' LIMIT 0,1");
+	$result_ca = mysql_fetch_object($sql_card_allow);
+	if(trim($result_ca->card_number)==""){
+		$sql_dp = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT item_code, code_length from sp_digital_products");
+		$digital_products_itemcode=array();
+		$digital_products_codelength=array();
+		$i=0;	
+		while($result_dp = mysql_fetch_assoc($sql_dp)){
+			$digital_products_itemcode[$i]=$result_dp['item_code'];
+			$digital_products_codelength[$i]=$result_dp['code_length'];
+			$i++;
+		}
+		$digital_product = 0;
+		for($i=0; $i<count($digital_products_codelength); $i++){
+			if(in_array(substr($_SESSION['ORDER_DETAILS']['uniqID'],3,$digital_products_codelength[$i]),$digital_products_itemcode)){
+				$digital_product = 1;		
+			}
+		}
+		if($digital_product == 1){
+			$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_epay SET card_number='".$_SESSION['ORDER_DETAILS']['unique_id_code'].$Acc_No."' WHERE order_id='".$order_id."'");
+			$sql_no_txn = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT txn_per_month, txn_per_day from sp_payment_options WHERE id='1'");
+			$result_no_txn = mysql_fetch_object($sql_no_txn);	
+			$txn_per_month = $result_no_txn->txn_per_month;
+			$txn_per_day = $result_no_txn->txn_per_day;
+			
+			$sql_no_txn_this_month = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT COUNT(`gw_return_id`) as total_txn_in_month FROM sp_epay WHERE `gw_return_id`='000' AND card_number='".$_SESSION['ORDER_DETAILS']['unique_id_code'].$Acc_No."' AND CONCAT(YEAR(`intime`),MONTH(`intime`)) = CONCAT(YEAR(NOW()),MONTH(NOW())) GROUP BY CONCAT(YEAR(`intime`),MONTH(`intime`))");
+			$result_no_txn_this_month = mysql_fetch_object($sql_no_txn_this_month);
+			
+			if($_SERVER["SERVER_NAME"]=="dev.shurjomukhi.com"){
+				$server_add = "http://dev.shurjomukhi.com/shurjorajjo/shurjopay/";
+			}
+			else if($_SERVER["SERVER_NAME"]=="localhost"){
+				$server_add = "http://localhost/shurjopaysr/";
+			}
+			else{
+				$server_add = "https://shurjopay.com/";
+			}
+			
+			if($Transaction_amount > 4000){
+				$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_epay SET return_code='555', bank_status='PENDING' WHERE order_id='".$order_id."'");
+				$_SESSION['order_details_response']['bankTxStatus'] = "FAIL";	
+				$_SESSION['order_details_response']['txnAmount'] = $Transaction_amount;			
+				$_SESSION['order_details_response']['spCode'] = "555";
+				$_SESSION['order_details_response']['spCodeDes'] = "Amount is more than BDT 4000";		
+				return true;	
+			}			
+			else if($result_no_txn_this_month->total_txn_in_month > $txn_per_month){
+				$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_epay SET reconciliation='1', return_code='555', bank_status='PENDING' WHERE order_id='".$order_id."'");
+				$_SESSION['order_details_response']['bankTxStatus'] = "FAIL";	
+				$_SESSION['order_details_response']['txnAmount'] = $Transaction_amount;			
+				$_SESSION['order_details_response']['spCode'] = "555";
+				$_SESSION['order_details_response']['spCodeDes'] = "Transaction limit over for this month";		
+				return true;		
+			}
+			else{
+				$sql_no_txn_this_day = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT COUNT(`gw_return_id`) as total_txn_in_day FROM sp_epay WHERE `gw_return_id`='000' AND card_number='".$_SESSION['ORDER_DETAILS']['unique_id_code'].$Acc_No."' AND CONCAT(YEAR(`intime`),MONTH(`intime`),DAY(`intime`)) = CONCAT(YEAR(NOW()),MONTH(NOW()),DAY(NOW())) GROUP BY CONCAT(YEAR(`intime`),MONTH(`intime`),DAY(`intime`))");
+				$result_no_txn_this_day = mysql_fetch_object($sql_no_txn_this_day);
+				
+				if($result_no_txn_this_day->total_txn_in_day > $txn_per_day){
+					$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_epay SET reconciliation='1', return_code='555', bank_status='PENDING' WHERE order_id='".$order_id."'");
+					$_SESSION['order_details_response']['bankTxStatus'] = "FAIL";	
+					$_SESSION['order_details_response']['txnAmount'] = $Transaction_amount;			
+					$_SESSION['order_details_response']['spCode'] = "555";
+					$_SESSION['order_details_response']['spCodeDes'] = "Transaction limit over for this day";
+					return true;
+				}
+				else{
+					return true;
+				}
+			}
+		}
+	}
+	return true;
+}
+function bracRejected($order_id,$Transaction_amount,$Transaction_status,$DecryptedReceipt,$Name,$Acc_No) { 
+	$date = new DateTime();
+	$date->setTimezone(new DateTimeZone("Asia/Dhaka"));
+	
+	$_SESSION['order_details_response']['txID'] = $_SESSION['ORDER_DETAILS']['uniqID'];
+	
+	$_SESSION['order_details_response']['bankTxID'] = $order_id;
+	$_SESSION['order_details_response']['bankTxStatus'] = "FAIL";
+	$_SESSION['order_details_response']['txnAmount'] = $Transaction_amount;
+	
+	$sql_query=mysqli_query($GLOBALS["___mysqli_sm"], "SELECT * from sp_bankinfo WHERE gw_name='brac' and return_code='604'");	
+	$result= mysql_fetch_object($sql_query);
+	
+	$_SESSION['order_details_response']['spCode'] = $result->return_code;
+	$_SESSION['order_details_response']['spCodeDes'] = $result->return_status;
+	
+	$bank_data = $DecryptedReceipt;
+	
+	$sql_query=mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_epay SET gw_return_id='".$_SESSION['order_details_response']['spCode']."', gw_return_msg='".$_SESSION['order_details_response']['spCodeDes']."', gw_time='".$date->format('Y-m-d H:i:s')."', return_code='".$result->return_code."', bank_status='FAIL', card_holder_name='".$Name."', card_number='".$Acc_No."', bank_response='".$bank_data."' WHERE order_id='".$order_id."'"); 
+	$sql_query=mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_payments SET epay_res_time='".$date->format('Y-m-d H:i:s')."', epay_status='".$_SESSION['order_details_response']['spCode']."', epay_status_text='".$_SESSION['order_details_response']['spCode']."' WHERE tc_txid='".$order_id."'");
+	$sql_query=mysqli_query($GLOBALS["___mysqli_sm"], "INSERT INTO sp_brac_transactions SET transaction_id='".$order_id."', posted_xml_data='".$bank_data."', transaction_time='".$date->format('Y-m-d H:i:s')."'"); 
+	
+	$sql_card_allow = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT card_number from sp_cards_allow WHERE card_number='".$Acc_No."' AND status='1' LIMIT 0,1");
+	$result_ca = mysql_fetch_object($sql_card_allow);
+	if(trim($result_ca->card_number)==""){
+		$sql_dp = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT item_code, code_length from sp_digital_products");
+		$digital_products_itemcode=array();
+		$digital_products_codelength=array();
+		$i=0;	
+		while($result_dp = mysql_fetch_assoc($sql_dp)){
+			$digital_products_itemcode[$i]=$result_dp['item_code'];
+			$digital_products_codelength[$i]=$result_dp['code_length'];
+			$i++;
+		}
+		$digital_product = 0;
+		for($i=0; $i<count($digital_products_codelength); $i++){
+			if(in_array(substr($_SESSION['ORDER_DETAILS']['uniqID'],3,$digital_products_codelength[$i]),$digital_products_itemcode)){
+				$digital_product = 1;		
+			}
+		}
+		if($digital_product == 1){
+			$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_epay SET card_number='".$_SESSION['ORDER_DETAILS']['unique_id_code'].$Acc_No."' WHERE order_id='".$order_id."'");
+			$sql_no_txn = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT txn_per_month, txn_per_day from sp_payment_options WHERE id='1'");
+			$result_no_txn = mysql_fetch_object($sql_no_txn);	
+			$txn_per_month = $result_no_txn->txn_per_month;
+			$txn_per_day = $result_no_txn->txn_per_day;
+			
+			$sql_no_txn_this_month = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT COUNT(`gw_return_id`) as total_txn_in_month FROM sp_epay WHERE `gw_return_id`='000' AND card_number='".$_SESSION['ORDER_DETAILS']['unique_id_code'].$Acc_No."' AND CONCAT(YEAR(`intime`),MONTH(`intime`)) = CONCAT(YEAR(NOW()),MONTH(NOW())) GROUP BY CONCAT(YEAR(`intime`),MONTH(`intime`))");
+			$result_no_txn_this_month = mysql_fetch_object($sql_no_txn_this_month);
+			
+			if($_SERVER["SERVER_NAME"]=="dev.shurjomukhi.com"){
+				$server_add = "http://dev.shurjomukhi.com/shurjorajjo/shurjopay/";
+			}
+			else if($_SERVER["SERVER_NAME"]=="localhost"){
+				$server_add = "http://localhost/shurjopaysr/";
+			}
+			else{
+				$server_add = "https://shurjopay.com/";
+			}
+			
+			if($result_no_txn_this_month->total_txn_in_month >= $txn_per_month){
+				$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_epay SET reconciliation='1' WHERE order_id='".$order_id."'");
+				$_SESSION['order_details_response']['bankTxStatus'] = "FAIL";	
+				$_SESSION['order_details_response']['txnAmount'] = $Transaction_amount;			
+				$_SESSION['order_details_response']['spCode'] = "555";
+				$_SESSION['order_details_response']['spCodeDes'] = "Transaction limit over for this day";
+				return true;
+			}
+			else{
+				$sql_no_txn_this_day = mysqli_query($GLOBALS["___mysqli_sm"], "SELECT COUNT(`gw_return_id`) as total_txn_in_day FROM sp_epay WHERE `gw_return_id`='000' AND card_number='".$_SESSION['ORDER_DETAILS']['unique_id_code'].$Acc_No."' AND CONCAT(YEAR(`intime`),MONTH(`intime`),DAY(`intime`)) = CONCAT(YEAR(NOW()),MONTH(NOW()),DAY(NOW())) GROUP BY CONCAT(YEAR(`intime`),MONTH(`intime`),DAY(`intime`))");
+				$result_no_txn_this_day = mysql_fetch_object($sql_no_txn_this_day);
+				
+				if($result_no_txn_this_day->total_txn_in_day >= $txn_per_day){
+					$sql_query = mysqli_query($GLOBALS["___mysqli_sm"], "UPDATE sp_epay SET reconciliation='1' WHERE order_id='".$order_id."'");
+					$_SESSION['order_details_response']['bankTxStatus'] = "FAIL";	
+					$_SESSION['order_details_response']['txnAmount'] = $Transaction_amount;			
+					$_SESSION['order_details_response']['spCode'] = "555";
+					$_SESSION['order_details_response']['spCodeDes'] = "Transaction limit over for this day";
+					return true;
+				}
+				else{
+					return true;
+				}
+			}
+		}
+	}
+	return true;	
+}
+?>

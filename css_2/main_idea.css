@@ -1,0 +1,51 @@
+body{ }
+
+.full_content {
+    background-image: url("../images/bg.png");
+    background-repeat: repeat;
+    border-radius: 10px;
+    margin: 5% auto;
+    padding: 4% 1% 1%;
+    width: 58%;
+}
+
+
+.main_content{width:100%;border-bottom: 1px solid #c8c8c8;}
+
+
+.up_content {
+    margin: 0 auto;
+    width: 85%;
+}
+.up_content img{width: 100%;}
+.paypoint{float:left;margin-bottom: 40px;}
+.surjopay {
+    float: right;
+    left: 4.5%;
+    padding-bottom: 0;
+    position: relative;
+    top: -18px;
+}
+
+
+.main_content .row{clear: both;}
+.row {
+    border-radius: 8px;
+    margin: 4% auto;
+    padding: 5% 0;
+    width: 85%;
+}
+.image1{margin-left: 1.75%}
+
+.row img {
+    float: left;
+    margin: 0 1%;
+    width:22.10%;
+}
+.title{margin:0 3%;}
+.copyright {
+    font-size: 74%;
+    margin: 0 auto;
+    padding-top: 1%;
+    width: 75px;
+}

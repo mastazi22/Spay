@@ -1,0 +1,182 @@
+<?php
+// DBBL payment gateway
+class QCASH
+{
+	
+	public $ammount;
+	public $ipAddress;
+	public $openDescription;
+	public $hiddenDescription;
+	public $DB;
+	//public $ipg_server_url='https://mpi.itcbd.com:2222/execHTML.jsp';
+	public $ipg_server_url='https://mpi.itcbd.com:18288/execHTML.jsp';
+	public $mer_id='SURMKH';
+	
+	public function __construct(){
+		$this->DB=new DB();
+		$this->ammount=0;
+		$this->ipAddress=$_SERVER['REMOTE_ADDR'];
+		$this->openDescription='';
+		$this->hiddenDescription='shurjomukhi';
+	}
+	
+	public function setAmmount($ammount){
+		$this->ammount=floatval($ammount);
+	}
+	public function getAmount(){
+		// it will return the paisa. example 1 taka= 1*100 paisa
+		return $this->ammount*100;
+	}
+	public function getIpAddress(){
+		return $this->ipAddress;
+	}
+	public function setOpenDescription($description){
+		$this->openDescription=$description;
+	}
+	public function getOpenDescription(){
+		return $this->openDescription;
+	}
+	public function setHiddenDescription($description){
+		$this->hiddenDescription=$description;
+	}
+	public function getHiddenDescription(){
+		return $this->hiddenDescription;
+	}
+	
+	public function requestPayment(){
+		
+				$trans_id=$this->getTransactionID();
+				
+				$date=new DateTime();
+				$date->setTimezone(new DateTimeZone("Asia/Dhaka"));
+				$current_time=$date->format('Y-m-d H:i:s');
+				$data=array('transaction_id'=>$trans_id,
+							'transaction_time'=>$current_time);
+				
+				// insert the transaction ID into the DB		
+				$inserted_db=$this->DB->insert(DBBL_TNX_TABLE,$data);
+				if($inserted_db){
+					$trans_id =urlencode($trans_id);
+					$bank_gateway="https://ecom.dutchbanglabank.com/ecomm2/ClientHandler?trans_id=".$trans_id."&product_name=".$this->getOpenDescription()."&product_quantity=1&product_price=".$this->getAmount();
+					
+					//header("Location: https://ecom.dutchbanglabank.com/ecomm2/ClientHandler?trans_id=".$trans_id."&product_name=".$this->getOpenDescription()."&product_quantity=1&product_price=".$this->getAmount());
+					
+					// js redirect
+					print('<script language="javascript" type="text/javascript">
+							window.location.href="'.$bank_gateway.'";
+							</script>
+							');
+					
+					
+				}
+	}
+	
+	
+	public function generateTransactionID(){
+		echo $this->getAmount();exit;
+		$str = '/opt/jdk1.6.0_21/bin/java -jar  "/opt/DBBL/key/ecomm_merchant.jar" "/opt/DBBL/key/merchant.properties" -v '.$this->getAmount().' 050 '.$this->getIpAddress().' '.$this->getOpenDescription().' --mrch_transaction_id='.$this->getHiddenDescription();
+				$outputArray=array();
+				exec($str, $outputArraty);
+				$final= $outputArray[0];
+				$trans_id = substr($final,16,40);
+				if($trans_id!=""){
+					$_SESSION['CURRENT_TRANSACTION_TYPE']='DBBL';
+					$_SESSION['DBBL_transactionID'] = $trans_id;
+					return $trans_id;
+				}else{
+					return FALSE;
+				}
+	} // end  generateTransactionID
+	
+	
+
+	public function getPaymentStatus($methodKey, $userID, $total_taka, $returnPoint, $productName, $approved_url, $cancelled_url, $declined_url){	
+	$IPGServerURL = $this->ipg_server_url;	
+	$qcash = '<TKKPG>
+				  <Request>
+				   <Operation>CreateOrder</Operation> 
+				   <Language>EN</Language>
+				   <Order>
+				     <Merchant>'.$this->mer_id.'</Merchant>
+				     <Amount>'.$total_taka.'</Amount>
+				     <Currency>050</Currency>
+				     <Description>Test Merchant</Description>
+				     <ApproveURL>'.$approved_url.'</ApproveURL>
+				     <CancelURL>'.$cancelled_url.'</CancelURL>
+				     <DeclineURL>'.$declined_url.'</DeclineURL>
+				    </Order>
+				  </Request>
+				 </TKKPG>';
+	?>
+		<html>
+		<head>
+		</head>
+			<body onLoad="document.send_form.submit();">
+			  <form name="send_form" method="post" action="<?php echo $IPGServerURL?>" >
+			    <input type="hidden"  name="Request" id="Request" value="<?php echo $qcash?>">
+			  </form>
+			</body>
+
+		</html>
+	<?php		
+	}
+	
+	
+	public function getTransactionID(){
+		if(isset($_SESSION['DBBL_transactionID']) && $_SESSION['DBBL_transactionID']!="" )
+		return $_SESSION['DBBL_transactionID'];
+		else
+		return false;
+	}
+
+	/*
+	*	Stunnel connection
+	*	@params $data [ a request xml in paymentEngine.php ]
+	*	@return response xml after stunnel connection
+	*/
+	
+	public function Postdata_ecomgateway($data) {
+		
+		$hostname = '192.168.10.210'; // Stunnel IP
+		$port="644"; // Stunnel Port
+		$path = '/Exec';
+		$content = '';
+		
+		// Establish a connection to the $hostname server
+		$fp = fsockopen($hostname, $port, $errno, $errstr, 30);
+		
+		// Check if the connection is successfully established
+		if (!$fp) die('<p>'.$errstr.' ('.$errno.')</p>');
+		
+		// HTTP request header
+		$headers = 'POST '.$path." HTTP/1.0\r\n";
+		$headers .= 'Host: '.$hostname."\r\n";
+		$headers .= "Content-type: application/x-www-form-urlencoded\r\n";
+		$headers .= 'Content-Length: '.strlen($data)."\r\n\r\n";
+		
+		// Send HTTP request to the server
+		fwrite($fp, $headers.$data);
+		
+		while ( !feof($fp) ) {
+			$inStr= fgets($fp, 1024);
+
+			// Cut the HTTP response headers. The string can be commented out if it is necessary to parse the header			
+			// In this case it is necessary to cut the response
+			
+			if (substr($inStr,0,7)!=="<TKKPG>") continue;
+			// Disconnect
+			$content .= $inStr;
+		}
+		
+			fclose($fp);
+	
+		// To parse the response, use the simplexml library
+		// Documentation on simplexml - http://us3.php.net/manual/ru/book.simplexml.php
+		$xml = simplexml_load_string($content); // Load data from the string
+		return ($xml);
+		
+	}
+	
+} // end class DBBL
+  
+?>

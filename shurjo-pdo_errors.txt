@@ -1,0 +1,83 @@
+
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+
+SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
